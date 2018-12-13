@@ -12,7 +12,6 @@ struct cpu
 void criaProcessos(fila *f1);
 void executaProcesso(fila *f);
 int calculaQuantum(fila f);
-void grafico(int tempo, int totalp, int *totalfila);
 
 int main (void)
 {
@@ -42,7 +41,6 @@ void executaProcesso(fila *f)
     processador.tempoExec=0;
 
 fprintf(arquivo, "# Tempo \t Fila \n" );
-    //mostraFila(f[0]);
 
     while(nprocessos<1000000)
     {
@@ -56,8 +54,6 @@ fprintf(arquivo, "# Tempo \t Fila \n" );
             {
                 printf("Numero de processos da fila %d que foram executados %d\n", j, nPorFila[j]);
             }
-            //grafico(processador.tempoExec, nprocessos, nPorFila);
-
             exit(0);
         }
 
@@ -80,30 +76,21 @@ fprintf(arquivo, "# Tempo \t Fila \n" );
         if(!isEmpty(f[0]))
             i=0;
 
-        //printf("Tempo de execucao do preocesso %d e de %d\n", f[i].inicio->id, f[i].inicio->tamanho);
-
         f[i].inicio->tamanho=f[i].inicio->tamanho-calculaQuantum(f[i]);
 
         processador.tempoExec+=f[i].inicio->tamanho;
 
         if(f[i].inicio->tamanho>0)
         {
-        //printf("removendo processo %d", f[i].inicio->id);
         nPorFila[i]++;
             removee(&f[i]);
             nprocessos++;
-
-
-            //printf("\nprintando o  numero de processos para controle %d \n", nprocessos);
         }
         else if(f[i].inicio->tamanho<=0)
         {
             insere(&f[i], f[i].inicio->id, f[i].inicio->prioridade, f[i].inicio->tamanho, 0);
             removee(f);
         }
-
-        //printf("Mostrando a fila %d", i);
-        //mostraFila(f[i]);
         fprintf(arquivo, "%d \t %d \n", processador.tempoExec, nPorFila[i]);
     }
 }
@@ -113,10 +100,8 @@ int calculaQuantum(fila f)
     int quantum=f.inicio->tamanho-f.inicio->prioridade;
     if (quantum==0)
     {
-        //printf("\n\n\nQUANTUM= %d\n\n\n", quantum);
         return f.inicio->tamanho;
     }
-    //printf("\n\n\nQUANTUM= %d\n\n\n", quantum);
     return quantum;
 }
 
@@ -160,14 +145,5 @@ void criaProcessos(fila *f)
         if(prioridade>90 &&prioridade<=100)
             insere(&f[9], id, prioridade, tamanho, 0);
     }
-}
-
-void grafico(int tempo, int totalp, int *totalfila)
-{
-    int t1=tempo /10;
-
-    printf("\n0 XXXX %d XXXX %d XXXX %d XXXX %d XXXX %d XXXX %d XXXX %d XXXX %d XXXX %d XXXX %d XXXX\n", t1, t1*2, t1*3, t1*4, t1*5, t1*6, t1*7, t1*8, t1*9 , t1*10);
-    printf("Tempo ->");
-    getchar();
 }
 

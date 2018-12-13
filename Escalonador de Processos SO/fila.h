@@ -3,8 +3,6 @@
 
 #define TRUE 1
 #define FALSE 0
-//#define MAXIMOCANDIDATOS 3
-//#define TOTALELEITORES 10
 
 struct no
 {
@@ -25,7 +23,6 @@ void create(fila *q);
 int  isEmpty(fila q);
 int  insere(fila *q, int d, int p, int tam, int quantum);
 int  removee(fila *q);
-int geraVoto(int n);
 void mostraFila(fila q);
 
 void create(fila *q)
@@ -88,8 +85,7 @@ void mostraFila(fila q)
         printf ("Id %d ", aux->id);
         printf ("Prioridade %d ", aux->prioridade);
         printf ("Tamanho %d\n", aux->tamanho);
-        //printf ("quantum %d\n", aux->quantum);
-       // printf ("tipo %d\n\n", aux->tipo);
+        printf ("quantum %d\n", aux->quantum);
         aux=aux->prox;
     }
 }
